@@ -1,0 +1,117 @@
+<html ng-app>
+  <head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="/home/qwinix/Documents/underscore.js"></script>
+
+
+  <style>
+
+body {
+
+    background-image: url("to.jpg") no-repeat;
+    background-size: cover;
+    
+}
+.wap {
+ 
+  width: 100%;
+}
+
+h2 {
+  font-size: 2em;
+  
+  font-family: megrim, fantasy;
+  
+  padding: 40px;
+  margin: 0;
+  color: #333;
+  text-align: center;
+ }
+.emphasis {
+  font-family: vast-shadow, sans-serif;
+  font-size: 4em;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+.clear-btn {
+  width: 100%;
+  border: none;
+  height: 100px;
+  background: #13756D;
+  font-size: 2em;
+  font-family: megrim, fantasy;
+  color: #aaa;
+  
+}
+
+.add-btn {
+  width: 40%;
+  border: none;
+  background: #13756D;
+  padding: 0;
+  height: 100px;
+  h2 {
+  
+   padding: 0;
+   font-size: 4em;
+   font-family: megrim, fantasy;
+   color: #333;
+  }
+}
+
+
+  </style>
+
+  <script type="text/javascript">
+
+  function TodoCtrl($scope) {
+  
+  $scope.todos = [
+    {text:'Qwinix', done:false},         
+    {text: 'Team', done:false}
+  ];
+  
+  $scope.getTotalTodos = function () {
+    return $scope.todos.length;
+  };
+  
+  
+  $scope.addTodo = function () {
+    $scope.todos.push({text:$scope.formTodoText, done:false});
+    $scope.formTodoText = '';
+  };
+  
+    $scope.clear1 = function () {
+        $scope.todos = _.filter($scope.todos, function(todo){
+            return !todo.done;
+        });
+    };
+}
+</script>
+  </head>
+
+
+  <body background="to.jpg">
+    <div class="wap" ng-controller="TodoCtrl">
+      <h2>You got <span class="emphasis">{{getTotalTodos()}}</span> things </h2>
+      <ul>
+        <li ng-repeat="todo in todos">
+          <input type="checkbox" ng-model="todo.done"/>
+          <span class="done-{{todo.done}}">{{todo.text}}</span>
+        </li>
+      </ul>
+      <form>
+        <input class="add-input" placeholder="please Enter ..." type="text" ng-model="formTodoText" ng-model-instant />
+        <button class="add-btn" ng-click="addTodo()"><h2>Add</h2></button>
+      </form>
+      
+      <button class="clear-btn" ng-click="clear1()">Delete Things</button>
+    </div>
+  </body>
+  
+</html>
